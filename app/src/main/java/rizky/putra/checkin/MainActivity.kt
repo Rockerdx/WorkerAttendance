@@ -13,12 +13,13 @@ import rizky.putra.checkin.model.StaffInfoResponse
 import rizky.putra.checkin.presenter.MainPresenter
 import rizky.putra.checkin.utils.LoginDataManager
 import rizky.putra.checkin.utils.formatDate
+import java.text.DecimalFormat
 
 class MainActivity : AppCompatActivity(),MainPresenter.View {
 
 
     val CODE_CHECKIN = 20
-    val CODE_CHECKOUT = 20
+    val CODE_CHECKOUT = 25
     var isLogin = false
     private val presenter: MainPresenter = MainPresenter(this)
 
@@ -86,7 +87,8 @@ class MainActivity : AppCompatActivity(),MainPresenter.View {
 
     override fun onGetInfoSuccess(response: StaffInfoResponse) {
         txt_job_name.text = response.position.name
-        txt_job_wage.text = response.wage_amount.toString()
+        val formatter = DecimalFormat("Rp #,###")
+        txt_job_wage.text = formatter.format(response.wage_amount)
         txt_job_rate.text = response.wage_type
         txt_job_location.text = response.location.address.street_1
         txt_job_place.text = response.client.name
