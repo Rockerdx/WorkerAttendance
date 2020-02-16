@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">CheckIn</string>
+    <string name="h1">Barista</string>
+    <string name="rp_120_000">Rp 120,000</string>
+    <string name="kaizen_coff">Kaizen Coffee Co.</string>
+    <string name="per_day">per day</string>
+    <string name="km_away_888">888 6-7 Ekkamai Rd, Khlong Tan Nuea, Watthana, Bangkok 10110, Thailand</string>
+    <string name="am">08:00am</string>
 </resources>

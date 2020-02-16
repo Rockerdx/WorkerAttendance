@@ -1,17 +1,20 @@
 package rizky.putra.checkin.network
 
+import android.content.Context
+import android.util.Log
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import rizky.putra.checkin.BuildConfig
+import rizky.putra.checkin.utils.LoginDataManager
 import java.util.concurrent.TimeUnit
 
 object DataSource {
     private lateinit var service: ApiService
 
-    fun getService(): ApiService {
+    fun getService(context: Context): ApiService {
         val builder = Retrofit.Builder()
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
@@ -22,14 +25,15 @@ object DataSource {
             loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
             okHttpClientBuilder.addInterceptor(loggingInterceptor)
         }
-        val key = ""
+        val key = LoginDataManager.getKey(context)
+        Log.d("tes","Token $key")
         val okHttpClient = okHttpClientBuilder
             .readTimeout(25, TimeUnit.SECONDS)
             .addInterceptor { chain ->
                 chain.proceed(
                     chain.request()
                         .newBuilder()
-                        .header("Authorization", key)
+                        .header("Authorization", "Token $key")
                         .build()
                 )
             }

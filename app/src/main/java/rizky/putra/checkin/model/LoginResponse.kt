@@ -1,5 +1,3 @@
 package rizky.putra.checkin.model
 
-class LoginResponse {
-    internal var key: String? = ""
-}
+data class LoginResponse(var key: String? = "")
